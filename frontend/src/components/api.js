@@ -94,7 +94,7 @@ export const suggestLatestMoviesBasedOnGenre = async (name) => {
 
 export const RecommendMovieGenre = async (name) => {
   try {
-    const response = await axios.post('/api/recommend_movie_genre', { username: name });
+    const response = await axios.post('/api/get_recommended_movie_by_favorite_genre', { username: name });
     return response.data;
   } catch (error) {
     console.error('Error during user suggestion:', error);

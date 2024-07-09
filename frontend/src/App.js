@@ -1,19 +1,38 @@
 // App.js
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import axios from 'axios';
 import HomePage from './HomePage';
+import './index.css'; 
 
+// imagen de fondo
+const backgroundStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: -1,
+  backgroundImage: `url('./fondlog.jpeg')`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+};
+
+// contenedor del formulario de inicio de sesión
 const containerStyle = {
   width: '300px',
   margin: '100px auto',
   padding: '20px',
   border: '1px solid #ccc',
   borderRadius: '5px',
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  color: 'black',
 };
 
 const inputStyle = {
-  marginBottom: '10px', // Add margin at the bottom of the input
+  marginBottom: '10px',
 };
 
 const buttonStyle = {
@@ -23,7 +42,7 @@ const buttonStyle = {
   border: 'none',
   borderRadius: '5px',
   cursor: 'pointer',
-  margin: '0 5px', // Add margin to create space between buttons
+  margin: '0 5px',
 };
 
 function LoginPage() {
@@ -32,18 +51,15 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    document.title = userData ? `Welcome, ${userData.user.name}!` : 'MovieMate';
+    document.title = userData ? `Bienvenido, ${userData.user.name}!` : 'Movies';
   }, [userData]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post('/api/login', { username });
-      //console.log('Response:', response.data.user.name); // Log the response data to the console
       setUserData(response.data);
       setErrorMessage('');
-
-      //navigate('/home', { state: { userData: response.data } });
     } catch (error) {
       console.error('Error during login:', error);
       if (error.response && error.response.status === 401) {
@@ -56,33 +72,38 @@ function LoginPage() {
   };
 
   return (
-    <div style={containerStyle}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username" >Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} style={inputStyle} />
-        <br />
-        <button type="submit" style={buttonStyle}>
-          Log in
-        </button>
-        <button type="submit" style={buttonStyle}>
-          Sign up
-        </button>
-      </form>
-      {errorMessage && (
-        <p style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</p>
-      )}
-      {userData && (
-        <div>
-          <p>
-            Welcome, {userData.user.name} (ID: {userData.user.userId})!
-          </p>
-          <Link to='/home' state={ userData}>
-            Learn More
-            </Link>
+    <div>
+      {/* Nuevo div con imagen de fondo */}
+      <div style={backgroundStyle}></div>
 
-        </div>
-      )}
+      {/* Contenedor del formulario de inicio de sesión */}
+      <div style={containerStyle} className="login-container">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <label htmlFor="username">Username:</label>
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} style={inputStyle} />
+          <br />
+          <button type="submit" style={buttonStyle}>
+            Log in
+          </button>
+          <button type="submit" style={buttonStyle}>
+            Sign up
+          </button>
+        </form>
+        {errorMessage && (
+          <p style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</p>
+        )}
+        {userData && (
+          <div>
+            <p>
+              Welcome, {userData.user.name} (ID: {userData.user.userId})!
+            </p>
+            <Link to='/home' state={userData}>
+              Learn More
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

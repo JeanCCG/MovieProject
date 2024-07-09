@@ -1,3 +1,13 @@
+/* src/App.css */
+body {
+  background-image: url('../public/fondhome.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0; 
+  font-family: 'Roboto', sans-serif; 
+}
+
 .App {
   text-align: center;
 }
@@ -14,7 +24,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #da0d0d;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,23 +47,22 @@
   }
 }
 
-/* src/App.css */
 .app-container {
   display: flex;
 }
 
 .sidebar {
   width: 200px;
-  background-color: #f0f0f0;
+  background-color: #0a5545;
   padding: 20px;
 }
 
 .sidebar-left {
-  order: -1; /* Move sidebar to the left */
+  order: -1; /* Mueve la barra lateral a la izquierda */
 }
 
 .sidebar-right {
-  order: 2; /* Move sidebar to the right */
+  order: 2; /* Mueve la barra lateral a la derecha */
 }
 
 .news-feed {
@@ -63,8 +72,15 @@
 
 .news-item {
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   padding: 10px;
   width: 48%;
   box-sizing: border-box;
+}
+
+/* Estilo para el texto "Movie Suggestions" */
+.movie-suggestions {
+  color: #ffffff; 
+  font-size: 24px; 
+  margin-top: 20px; 
 }
